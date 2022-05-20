@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "uCShiwa": {
+      "commandName": "Project",
+      "commandLineArgs": "4444 ucshiwa.pfx ucshiwa"
+    }
+  }
+}

@@ -6,6 +6,9 @@
 - Use TLS and command obfuscation
 - Keep It Simple, Stupid
 
+This tool is presented for educational purpose. i do NOT maintain it.
+It was used in real security tests and in advenced penetration testing labs (2020-2022).
+
 ## Disclaimer
 
 Usage of all tools on this site for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state and federal laws. We assume no liability and are not responsible for any misuse or damage caused by this site. This tools is provided "as is" without warranty of any kind.

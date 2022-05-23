@@ -8,6 +8,7 @@
     <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
     <Platforms>x64</Platforms>
     <SelfContained>true</SelfContained>
+    <Version>4.0.7</Version>
   </PropertyGroup>
 
   <ItemGroup>

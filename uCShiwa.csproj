@@ -17,4 +17,13 @@
     <PackageReference Include="Microsoft.WSMan.Management" Version="6.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="SharpHound-Obfuscation\script.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Shellingan.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

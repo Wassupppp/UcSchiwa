@@ -6,7 +6,7 @@
 - Use TLS and command obfuscation
 - Keep It Simple, Stupid
 
-This tool is presented for educational purpose. i do not maintain it anymore.
+This tool is presented for educational purpose.
 It was used in real security tests and in advenced penetration testing labs (2020-2022).
 
 ## Disclaimer
@@ -121,3 +121,9 @@ Execute the output on the victim machine to get your reverse shell
 ## Misc
 
 this project contains also an exemple of how obfuscate Sharphound (BloodHound ingestor)
+
+## Love uCShiwa ? 
+
+Help me to keep uCShiwa free and open-source
+
+* [Ethereum Donation](https://etherscan.io/address/0xcC424e30Ff6eEAb4E6B3A900c5446038F858b314)

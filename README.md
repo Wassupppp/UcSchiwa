@@ -84,7 +84,7 @@ Certificate is manualy validated during the revershell connection
 
 Unzip it on the target machine with the `Expand-Archive` cmdlet
 
-## To use Shellingan.ps1 as a standalone script
+## To use Shellingan.ps1 as a standalone script for AMSI Bypass
 
 ### Import
 

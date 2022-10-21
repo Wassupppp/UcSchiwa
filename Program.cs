@@ -18,7 +18,7 @@ namespace uCShiwa
         static int Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("<0> uCShiwa v4.0.7");
+            Console.WriteLine("<0> uCShiwa v4.1.0");
             Console.ResetColor();
             
             //----------SERVER MODE----------//

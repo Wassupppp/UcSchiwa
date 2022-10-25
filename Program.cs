@@ -62,11 +62,12 @@ namespace uCShiwa
                         if (message == "exit")
                         {
                             client.Close();
-                            Console.Write("exit cmd: connexion closed");
+                            Console.WriteLine("exit cmd: connexion closed");
                         }
                         else if (message == "bg")
                         {
                             backgroundMode = !backgroundMode;
+                            Console.WriteLine("backgroude mode: {0}", backgroundMode);
                         }
                         //not a specific message
                         else
@@ -78,7 +79,7 @@ namespace uCShiwa
                             {
                                 Common.sendMsg(message, sslStream);
                                 client.Close();
-                                Console.Write("bg mode: connexion closed");
+                                Console.WriteLine("bg mode: connexion closed");
                             }
                             else
                             {

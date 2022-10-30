@@ -44,7 +44,7 @@ namespace uCShiwa
                     string message;
 
                     //cmd conf
-                    bool backgroundMode = false; // close connection without read response
+                    bool backgroundMode = true; // close connection without read response
 
 
                     while (client.Connected)
@@ -54,7 +54,9 @@ namespace uCShiwa
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.Write("<0> {0}>", client.Client.RemoteEndPoint);
                         Console.ResetColor();
-                        message = Console.ReadLine();
+
+                        //message = Console.ReadLine();
+                        message = File.ReadAllText("CommandeOneline.txt");
 
                         UServer.ULog(message);
 

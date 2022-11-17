@@ -16,11 +16,7 @@ namespace uCShiwa
     {
 
         static int Main(string[] args)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("<0> uCShiwa v4.1.0");
-            Console.ResetColor();
-            
+        {            
             //----------SERVER MODE----------//
             if (args.Length == 3)
             {
@@ -61,12 +57,12 @@ namespace uCShiwa
                         UServer.ULog(message);
 
                         //specific message
-                        if (message == "exit")
+                        if ("exit" == message)
                         {
                             client.Close();
                             Console.WriteLine("exit cmd: connexion closed");
                         }
-                        else if (message == "bg")
+                        else if ("bg" == message)
                         {
                             backgroundMode = !backgroundMode;
                             Console.WriteLine("backgroude mode: {0}", backgroundMode);

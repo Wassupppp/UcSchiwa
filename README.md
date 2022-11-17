@@ -60,7 +60,7 @@ TLS 1.2
 Consider the default `cert.pfx` file as compromised (password: ucshiwa). A quick way to generate your own is the `New-SelfSignedCertificate`:
 
 ```powershell
-New-SelfSignedCertificate -DnsName Ucshiwa.lan -CertStoreLocation Cert:\CurrentUser\My\  -KeyAlgorithm RSA -KeyLength 4096
+New-SelfSignedCertificate -DnsName Ucshiwa.lan -CertStoreLocation Cert:\CurrentUser\My\  -KeyAlgorithm RSA -KeyLength 4096 -NotAfter $(Get-Date).AddYears(30)
 certmgr.msc # export the generated certificate as password protected .pfx file 
 ```
 

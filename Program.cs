@@ -14,7 +14,6 @@ namespace uCShiwa
 {
     class Program
     {
-
         static int Main(string[] args)
         {            
             //----------SERVER MODE----------//
@@ -40,23 +39,20 @@ namespace uCShiwa
                     string message;
 
                     //cmd conf
-                    bool backgroundMode = true; // close connection without read response
+                    bool backgroundMode = false; // close connection without read response
 
 
                     while (client.Connected)
                     {
                         UServer.ULog(client.Client.RemoteEndPoint.ToString());
-
-                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.Write("<0> {0}>", client.Client.RemoteEndPoint);
-                        Console.ResetColor();
 
-                        //message = Console.ReadLine();
-                        message = File.ReadAllText("CommandeOneline.txt");
+                        message = Console.ReadLine();
+                        //message = File.ReadAllText("CommandeOneline.txt");
 
                         UServer.ULog(message);
 
-                        //specific message
+                        //specific commands
                         if ("exit" == message)
                         {
                             client.Close();
@@ -92,8 +88,6 @@ namespace uCShiwa
                 }
 
             }
-
-            
 
             //----------CLIENT MODE----------//
             else if (args.Length == 2)

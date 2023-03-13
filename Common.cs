@@ -15,7 +15,6 @@ namespace uCShiwa
     {
         public static void printHelp()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
             string executable = System.AppDomain.CurrentDomain.FriendlyName;
             Console.WriteLine("Options:");
             Console.WriteLine("Listener mode: {0} <port> <certificate.pfx> <certificate.passwd>", executable);
@@ -23,7 +22,6 @@ namespace uCShiwa
             Console.WriteLine("Specific reverseShell cmd:");
             Console.WriteLine("exit: close this connection and wait the next one");
             Console.WriteLine("bg: run next cmd in background (close connection before cmd result)");
-            Console.ResetColor();
         }
 
         public static string readMsg(SslStream sslStream, TcpClient client)

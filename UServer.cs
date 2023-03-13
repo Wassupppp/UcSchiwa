@@ -46,15 +46,11 @@ namespace uCShiwa
             catch(Exception e)
             {
                 Console.WriteLine("{0} Exception caught.", e);
-                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("<0> Obfuscation error: origninal command sended");
                 obfcmd = message;
             }
-            Console.ForegroundColor = ConsoleColor.Blue;
             //Console.WriteLine(obfcmd);
-            Console.ResetColor();
             return obfcmd;
-
         }
 
 
@@ -63,12 +59,10 @@ namespace uCShiwa
 
         public static void printConnection(SslStream sslStream)
         {
-            Console.ForegroundColor = ConsoleColor.Red; ;
             Console.WriteLine("Cipher: {0}", sslStream.CipherAlgorithm);
             Console.WriteLine("Hash: {0}", sslStream.HashAlgorithm);
             Console.WriteLine("Key exchange: {0}", sslStream.KeyExchangeAlgorithm);
             Console.WriteLine("Protocol: {0}", sslStream.SslProtocol);
-            Console.ResetColor();
         }
     }
 }

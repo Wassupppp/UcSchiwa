@@ -45,7 +45,7 @@ namespace uCShiwa
             }
             catch(Exception e)
             {
-                Console.WriteLine("{0} Exception caught.", e);
+                Console.WriteLine(e.InnerException);
                 Console.WriteLine("<0> Obfuscation error: origninal command sended");
                 obfcmd = message;
             }

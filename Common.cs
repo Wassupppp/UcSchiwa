@@ -22,6 +22,7 @@ namespace uCShiwa
             Console.WriteLine("Specific reverseShell cmd:");
             Console.WriteLine("exit: close this connection and wait the next one");
             Console.WriteLine("bg: run next cmd in background (close connection before cmd result)");
+            Console.WriteLine("autopilot: keep last command and send it forever)");
         }
 
         public static string readMsg(SslStream sslStream, TcpClient client)

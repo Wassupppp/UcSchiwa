@@ -23,7 +23,6 @@ function Invoke-Shellingan{
 
     .NOTES
         TO DO: Pipe, sleep time
-
     #>
     param(
         [Parameter(Mandatory=$true, Position=0)]
@@ -72,7 +71,7 @@ function Invoke-Shellingan{
         $rand1 = Get-Random -Maximum 254 -Minimum 5 ; $rand2 = Get-Random -Maximum 254 -Minimum 5 ; $rand3 = Get-Random -Maximum 254 -Minimum 5
         $output =  "`$$rand2=255;`$$rand1=[sYsTeM.TeXT.eNcOdInG];`$$rand3=`$$rand1::utF8.gEtbYtES('');`$$rand1::utf8.gEtsTRiNG(`$(([bYtE]" + $output + ")|%{`$$rand3+=(`$_+(`$$rand2+$derot))%`$$rand2};`$$rand3))"
     
-    }end{   
+    }end{
 
         if($iex){$output+= "|iex"}
         if($recurse -gt 1){Invoke-Shellingan $output $iex ($recurse-=1)  }

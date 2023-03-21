@@ -14,8 +14,7 @@ namespace uCShiwa
 {
     public class UServer
     {
-
-        public static void ULog(string message)
+        public static async void ULog(string message)
         {
             using (StreamWriter logfile = File.AppendText("Ulog.txt"))
             {
@@ -46,7 +45,7 @@ namespace uCShiwa
             catch(Exception e)
             {
                 Console.WriteLine(e.InnerException);
-                Console.WriteLine("<0> Obfuscation error: origninal command sended");
+                Console.WriteLine("<0> Obfuscation error: original command sended");
                 obfcmd = message;
             }
             //Console.WriteLine(obfcmd);

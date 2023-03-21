@@ -87,7 +87,7 @@ namespace uCShiwa
                                     {
                                         Common.sendMsg(message, sslStream);
                                         client.Close();
-                                        Console.WriteLine("<bg mode ->Closed>");
+                                        Console.WriteLine("<bg mode ->Closed>\n");
                                     }
                                     else
                                     {
@@ -130,7 +130,7 @@ namespace uCShiwa
                         sslStream.AuthenticateAsClient("client", null, System.Security.Authentication.SslProtocols.Tls12, false);
 
 
-                        while (true)
+                        while(true)
                         {
                             message = Common.readMsg(sslStream, client);
                             if (message != String.Empty || message != "(Empty)")

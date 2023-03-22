@@ -14,7 +14,7 @@ namespace uCShiwa
 {
     public class UServer
     {
-        public static async void ULog(string message)
+        public static void ULog(string message)
         {
             using (StreamWriter logfile = File.AppendText("Ulog.txt"))
             {
